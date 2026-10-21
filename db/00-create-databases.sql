@@ -1,0 +1,3 @@
+CREATE ROLE bss_app LOGIN PASSWORD :'bss_pw';
+CREATE DATABASE bss_core OWNER bss_app;
+REVOKE ALL ON DATABASE bss_core FROM PUBLIC;
