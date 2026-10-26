@@ -1,0 +1,29 @@
+### Health
+GET http://localhost:8080/bsscore/health
+
+### Login: Mona (OK)
+POST http://localhost:8080/bsscore/api/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+msisdn=01012345678&pin=1234
+
+### Login: wrong PIN (AUTH001)
+POST http://localhost:8080/bsscore/api/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+msisdn=01012345678&pin=9999
+
+### Login: suspended line (AUTH002)
+POST http://localhost:8080/bsscore/api/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+msisdn=01234567890&pin=1111
+
+### My profile (needs a login first)
+GET http://localhost:8080/bss-core/api/subscriber/me
+
+### Logout
+POST http://localhost:8080/bss-core/api/auth/logout
+
+### Logout
+POST http://localhost:8080/bsscore/api/auth/logout
