@@ -36,7 +36,7 @@ public final class SessionUtil {
 
     public static String currentUser(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        return session == null ? null : (String) request.getAttribute(ATTRIBUTE_USER);
+        return session == null ? null : (String) session.getAttribute(ATTRIBUTE_USER);
     }
 
     public static String currentMsisdn(HttpServletRequest request) {
