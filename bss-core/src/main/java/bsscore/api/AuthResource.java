@@ -42,4 +42,11 @@ public class AuthResource {
 
         return ResponseHelper.ok(data);
     }
+
+    @POST
+    @Path("/logout")
+    public Response logout(@Context HttpServletRequest request) {
+        SessionUtil.logout(request);
+        return ResponseHelper.ok();
+    }
 }
