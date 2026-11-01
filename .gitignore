@@ -8,7 +8,10 @@ target/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
-.idea/*
+.idea/encodings.xml
+.idea/misc.xml
+.idea/vcs.xml
+.idea/.gitignore
 .idea/libraries/
 *.iws
 *.iml
