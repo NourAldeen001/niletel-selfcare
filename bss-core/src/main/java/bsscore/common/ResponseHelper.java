@@ -9,6 +9,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public final class ResponseHelper {
 
@@ -50,6 +51,18 @@ public final class ResponseHelper {
         response.setStatus(code.getHttpStatus());
         response.setContentType(JSON_UTF8);
         response.getWriter().write(failJson(code));
+    }
+
+    public static boolean isUniqueViolation(SQLException e) {
+        for (SQLException current = e;
+             current != null;
+             current = current.getNextException()) {
+
+            if ("23505".equals(current.getSQLState())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -2,6 +2,7 @@ package bsscore.service;
 
 import bsscore.common.BusinessException;
 import bsscore.common.ErrorCode;
+import bsscore.common.ResponseHelper;
 import bsscore.common.Validation;
 import bsscore.dao.BalanceDao;
 import bsscore.dao.Jdbc;
@@ -59,9 +60,12 @@ public class DebitService {
             }
             long balanceAfter=subscriberInfo.amountPiasters()-amountPiasters;
             Ledger ledger=new Ledger(msisdn,"D",amountPiasters,balanceAfter,refNo,reason);
-            long txnId=ledgerDao.insert(connection,ledger);
+            long txnId=ledgerDao.insertLedgerDebit(connection,ledger);
            return new DebitResult(txnId,balanceAfter);
         } catch (SQLException e) {
+            if (ResponseHelper.isUniqueViolation(e)) {
+                throw new BusinessException(ErrorCode.TXN002);
+            }
             throw new RuntimeException("Debit transaction failed", e);
         }
 
