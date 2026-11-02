@@ -48,4 +48,14 @@ public class BalanceDao {
             return updateStat.executeUpdate();
         }
     }
+
+    public int refund(Connection connection,String msisdn,long amountPiasters)throws SQLException{
+        String refundQuery="update SUBSCRIBER set BALANCE_PIASTERS=BALANCE_PIASTERS+? where MSISDN=?";
+
+        try(PreparedStatement refundStat=connection.prepareStatement(refundQuery)){
+            refundStat.setLong(1,amountPiasters);
+            refundStat.setString(2,msisdn);
+            return refundStat.executeUpdate();
+        }
+    }
 }
